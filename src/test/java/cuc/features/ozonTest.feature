@@ -1,6 +1,8 @@
 Feature: some feature
-  Scenario: some
+  Scenario: book
     When open ozon page
+    Then click on city to choose
+    And type in appears row text "Ижевск" and press enter
     And click on button katalog
     Then a submenu appears
     Then move cursor on 'Книги'
@@ -8,7 +10,7 @@ Feature: some feature
     Then choose parametres 'Бестселлеры' and 'Языки программирования'
     Then a window appears in which the selected categories
     Then choose on a any book from the suggested list and click on 'В корзину'
-    Then a button 'В корзину' disappears
+    And a button 'В корзину' disappears
     When open a tab 'Корзина'
     Then appears choosen book
 
