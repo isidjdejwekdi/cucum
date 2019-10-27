@@ -1,5 +1,6 @@
 package cuc;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import cuc.OzonPage;
 import cucumber.api.PendingException;
@@ -22,7 +23,8 @@ public class MyStepdefs {
     @And("^click on button katalog$")
     public void clickOnButtonKatalog() throws InterruptedException {
         OzonPage.katalog().click();
-        Thread.sleep(500);
+        OzonPage.subMenu().shouldBe(Condition.exist);
+        //Thread.sleep(500);
     }
 
     @Then("^a submenu appears$")
@@ -58,8 +60,10 @@ public class MyStepdefs {
     public void chooseOnAAnyBookFromTheSuggestedListAndClickOnВКорзину() throws InterruptedException {
         if (OzonPage.messageToClose().isDisplayed())
             OzonPage.messageToClose().click();
+        OzonPage.getNameOfChoosingElement();
         OzonPage.buttonInBasket().click();
         Thread.sleep(500);
+        //System.out.println(OzonPage.getNameOfChoosingBook());
     }
 
 
@@ -76,9 +80,11 @@ public class MyStepdefs {
 
     @Then("^appears choosen book$")
     public void appearsChoosenBook() {
-        Assert.assertTrue("Выбранная нига не была добавлена в коорзину",OzonPage.bookName().exists());
+        OzonPage.getNameOfChoosenElement();
+        Assert.assertTrue("Выбранная книга не была добавлена в коорзину",OzonPage.NameOfChoosingElement.equals(OzonPage.NameOfChoosenElement));
+        System.out.println(OzonPage.NameOfChoosenElement+" "+OzonPage.NameOfChoosingElement);
     }
-
+//////////////////////////////////////////////////////////////////////
     @Then("^click on city to choose$")
     public void clickOnCityToChoose() throws InterruptedException {
         OzonPage.chooseCity().click();
@@ -111,7 +117,7 @@ public class MyStepdefs {
     @Then("^set price category$")
     public void setPriceCategory() throws InterruptedException {
         OzonPage.priceCategoryFrom().doubleClick();
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
         OzonPage.priceCategoryFrom().sendKeys("25000");
         //OzonPage.priceCategoryFrom().pressEnter();
         //Thread.sleep(500);
@@ -126,18 +132,20 @@ public class MyStepdefs {
 
     @Then("^choose on a any snowboard from the suggested list and click on 'В корзину'$")
     public void chooseOnAAnySnowboardFromTheSuggestedListAndClickOnВКорзину() throws InterruptedException {
-        OzonPage.burtonToBusket().click();
-        Thread.sleep(500);
+        OzonPage.buttonInBasket().click();
+        OzonPage.getNameOfChoosingElement();
+        Thread.sleep(1000);
     }
 
     @And("^this button disappears$")
     public void thisButtonDisappears() {
-        Assert.assertFalse("Кнопка не исчезла",OzonPage.burtonToBusket().isDisplayed());
+        Assert.assertFalse("Кнопка не исчезла",OzonPage.buttonInBasket().isDisplayed());
     }
 
     @Then("^appears choosen snowboard$")
     public void appearsChoosenSnowboard() {
-        Assert.assertTrue("Выбранный сноуборд не был добавлен в корзину",OzonPage.nameOfSnowboard().exists());
-
+        OzonPage.getNameOfChoosenElement();
+        Assert.assertTrue("Выбранный сноуборд не был добавлен в корзину",OzonPage.NameOfChoosingElement.equals(OzonPage.NameOfChoosenElement));
+        System.out.println(OzonPage.NameOfChoosenElement+"\n"+OzonPage.NameOfChoosingElement);
     }
 }
