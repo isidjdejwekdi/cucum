@@ -147,5 +147,6 @@ public class MyStepdefs {
         OzonPage.getNameOfChoosenElement();
         Assert.assertTrue("Выбранный сноуборд не был добавлен в корзину",OzonPage.NameOfChoosingElement.equals(OzonPage.NameOfChoosenElement));
         System.out.println(OzonPage.NameOfChoosenElement+"\n"+OzonPage.NameOfChoosingElement);
+        //
     }
 }
